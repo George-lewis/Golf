@@ -1,7 +1,8 @@
 #
 # For comparing the speed of a regular recursive fibonacci to a cached recursive fibonacci
 #
-# -- Daren Liang
+# Author: Daren Liang
+# "This demonstrates the power of caching to a greater extent than the example provided in fact.py"
 #
 
 import sys
