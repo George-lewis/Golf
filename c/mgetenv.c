@@ -82,7 +82,7 @@ int main(int argc, char** argv, char** envp) {
 	
 	printf("Hello world!\n");
 	
-	printf("Hello %s!", user);
+	printf("Hello %s!\n", user);
 	
 	char *spl = takeUntil("abcdn123", 'n');
 	
