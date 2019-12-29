@@ -1,5 +1,5 @@
 #
-# For comparing the speed of a regular recursive factorial to a cached recursive factorial
+# For comparing the speed of a regular recursive fibonacci to a cached recursive fibonacci
 #
 
 import sys
