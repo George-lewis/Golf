@@ -1,4 +1,10 @@
-// This needs to be cleaned up
+/*
+ *
+ * The goal is to recreate the standard posix function getenv() myself
+ * Originally I was using as few dependencies as I could get away with
+ * But bringing in the string functions made this much smaller
+ * 
+ */
 
 #include <stdlib.h>
 #include <stdio.h>
