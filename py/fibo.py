@@ -1,6 +1,8 @@
 #
 # For comparing the speed of a regular recursive fibonacci to a cached recursive fibonacci
 #
+# -- Daren Liang
+#
 
 import sys
 import time
