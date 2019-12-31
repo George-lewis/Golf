@@ -34,24 +34,6 @@ int* merge(int* a, int asize, int* b, int bsize) {
             ri++;
         }
 
-        // int ax = a[li];
-
-        // int bx = b[ri];
-
-        // if ( (li < asize && ax < bx) || ri >= bsize ) {
-
-        //     out[li + ri] = ax;
-
-        //     li++;
-
-        // } else {
-
-        //     out[li + ri] = bx;
-
-        //     ri++;
-
-        // }
-
     }
 
     return out;
