@@ -9,8 +9,7 @@
 // When a switch is flipped on it will notify all of its connected
 // Lights and so they will light up as well
 //
-// In theory you could have one light connected to multiple switches
-// For a more complicated system
+// In this example have one light connected to multiple switches
 //
 
 public class main {
@@ -23,9 +22,13 @@ public class main {
 
         Light l = new Light();
 
-        s1.addObserver(l);
+		// Connect lights to switch
+        
+		s1.addObserver(l);
 
         s2.addObserver(l);
+
+		// Flip various switches and check the status of the lights
 
         System.out.println(l.isOn());
 
