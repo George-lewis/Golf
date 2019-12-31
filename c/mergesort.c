@@ -17,23 +17,37 @@ int* merge(int* a, int asize, int* b, int bsize) {
 
     for (int li = 0, ri = 0; li + ri < asize + bsize;) {
 
-        int ax = a[li];
-
-        int bx = b[ri];
-
-        if ( (li < asize && ax < bx) || ri >= bsize ) {
-
-            out[li + ri] = ax;
-
-            li++;
-
-        } else {
-
-            out[li + ri] = bx;
-
+        if (li >= asize) {
+            out[li + ri] = b[ri];
             ri++;
-
+        } else if (ri >= bsize) {
+            out[li + ri] = a[li];
+            li++;
+        } else if (a[li] < b[ri]) {
+            out[li + ri] = a[li];
+            li++;
+        } else {
+            out[li + ri] = b[ri];
+            ri++;
         }
+
+        // int ax = a[li];
+
+        // int bx = b[ri];
+
+        // if ( (li < asize && ax < bx) || ri >= bsize ) {
+
+        //     out[li + ri] = ax;
+
+        //     li++;
+
+        // } else {
+
+        //     out[li + ri] = bx;
+
+        //     ri++;
+
+        // }
 
     }
 
@@ -59,18 +73,7 @@ void sort(int* arr, int l, int r) {
 
         int* new = merge(&arr[l], middle - l, &arr[middle], r - (middle));
 
-        // Figure out afterwards
-        // free(arr);
-
-        for (int i = 0; i < size; i++) {
-
-            arr[i] = new[i];
-
-        }
-
-        free(new);
-
-        // arr = new;
+        arr = new;
 
     }
 
@@ -140,6 +143,6 @@ int main() {
 
     PRINT(a);
 
-    benchmark(1000, 10);
+    benchmark(1000000, 10);
 
 }
