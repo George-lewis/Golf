@@ -3,6 +3,7 @@
 //
 // On my machine this algorithm can sort an array of one million elements
 // In less than 100 milliseconds when compiled with gcc with the flags `-O3 -march=native`
+// Even faster with `-finline-functions`
 //
 
 #include <stdlib.h>
@@ -128,6 +129,6 @@ int main() {
 
     PRINT(a);
 
-    benchmark(1000000, 10);
+    benchmark(1000000, 100);
 
 }
