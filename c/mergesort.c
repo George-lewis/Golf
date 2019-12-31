@@ -1,6 +1,9 @@
 //
 // Merge sort implemented in C
 //
+// On my machine this algorithm can sort an array of one million elements
+// In less than 100 milliseconds when compiled with gcc with the flags `-O3 -march=native`
+//
 
 #include <stdlib.h>
 #include <stdio.h>
