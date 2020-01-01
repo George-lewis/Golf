@@ -5,6 +5,9 @@
 // In less than 100 milliseconds when compiled with gcc with the flags `-O3 -march=native`
 // Even faster with `-finline-functions`
 //
+// Update: With Clang/LLVM my computer does it in about 30 milliseconds!
+// I had no idea Clang is this much faster than GCC
+//
 
 #include <stdlib.h>
 #include <stdio.h>
@@ -105,6 +108,8 @@ void benchmark(int size, int num_tests) {
 
     srand(time(NULL));
 
+    clock_t timings[num_tests];
+
     for (int i = 0; i < num_tests; i++) {
 
         int* arr = rand_array(size);
@@ -115,9 +120,21 @@ void benchmark(int size, int num_tests) {
 
         clock_t now = clock();
 
+        clock_t diff = now - start;
+
         printf("Took: %f seconds\n", (double)(now - start) /CLOCKS_PER_SEC);
 
     }
+
+    double temp = 0;
+
+    for (int i = 0; i < num_tests; i++) {
+
+        temp += timings[i];
+
+    }
+
+    printf("Average: %f", temp / num_tests);
 
 }
 
