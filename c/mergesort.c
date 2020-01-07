@@ -104,11 +104,26 @@ int* rand_array(int size) {
 
 }
 
+// Calculates the mean iteratively
+// This fixes issues with integer overflows
+// See https://stackoverflow.com/questions/1930454/what-is-a-good-solution-for-calculating-an-average-where-the-sum-of-all-values-e
+double mean(double* data, size_t size) {
+
+    double avg = 0;
+    
+    for (int i = 1; i <= size; i++) {
+        avg += (data[i - 1] - avg) / i;
+    }
+    
+    return avg;
+
+}
+
 void benchmark(int size, int num_tests) {
 
     srand(time(NULL));
 
-    clock_t timings[num_tests];
+    double timings[num_tests];
 
     for (int i = 0; i < num_tests; i++) {
 
@@ -122,19 +137,24 @@ void benchmark(int size, int num_tests) {
 
         clock_t diff = now - start;
 
-        printf("Took: %f seconds\n", (double)(now - start) /CLOCKS_PER_SEC);
+        double secs = (double)(now - start) / CLOCKS_PER_SEC;
+
+        timings[i] = secs;
+
+        printf("Took: %f seconds\n", secs);
 
     }
 
-    double temp = 0;
-
-    for (int i = 0; i < num_tests; i++) {
-
-        temp += timings[i];
-
-    }
-
-    printf("Average: %f", temp / num_tests);
+    printf( \
+"\n\
+-----------\n\
+| RESULTS |\n\
+-----------\n\
+Completed: %d sorts\n\
+Array length: %d\n\
+Average time per sort: %f seconds\n\
+-----------\n",
+        num_tests, size, mean(timings, num_tests));
 
 }
 
