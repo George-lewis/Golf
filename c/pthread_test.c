@@ -2,6 +2,8 @@
 // Demonstrates PThreads //
 ///////////////////////////
 
+// Note: Must be linked with the pthread library, for GCC: -lpthread
+
 #include <stdlib.h>
 #include <stdio.h>
 #include <unistd.h>
@@ -64,7 +66,7 @@ void print_arr(int *arr, size_t n) {
 int main() {
 
     // Our array
-	int arr[] = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12 };
+	int arr[] = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15 };
 	
 	int len = sizeof(arr) / sizeof(int);
 
@@ -75,7 +77,11 @@ int main() {
 
     // Start all the threads
 	for (int i = 0; i < NTHREADS; i++) {
-		set(args + i, arr, (len / NTHREADS) * i, len / NTHREADS, i + 1);
+        if (i == NTHREADS - 1) {
+            set(args + i, arr, (len / NTHREADS) * i, len -  (len / NTHREADS) * i, i + 1);
+        } else {
+		    set(args + i, arr, (len / NTHREADS) * i, len / NTHREADS, i + 1);
+        }
 		pthread_create(threads + i, NULL, proc, args + i);
 	}
 
