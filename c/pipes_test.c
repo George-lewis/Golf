@@ -1,3 +1,6 @@
+//////////////////
+// Demonstrates forking and pipe communication
+//////////////////
 #include <stdlib.h>
 #include <stdio.h>
 #include <sys/types.h>
