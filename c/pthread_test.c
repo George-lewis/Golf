@@ -19,17 +19,17 @@ typedef struct {
 // Thread function
 void* proc(void *args) {
 
-    // args is actually a double pointer
+	// args is actually a double pointer
 	proc_args *aargs = args;
 
 	printf("Thread-%d Start; start: %d\n", aargs->tnum, aargs->start, aargs->len);
 
 	for (int i = 0; i < aargs->len; i++) {
 
-        // Set up indicies
+		// Set up indicies
 		int idx = aargs->start + i, *v = aargs->in + idx, old = *v;
 
-        // Mutate
+		// Mutate
 		*v = (*v) * (*v);
 
 		printf("[%d]: %d -> %d\n", idx, old, *v);
@@ -65,7 +65,7 @@ void print_arr(int *arr, size_t n) {
 
 int main() {
 
-    // Our array
+	// Our array
 	int arr[] = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15 };
 	
 	int len = sizeof(arr) / sizeof(int);
@@ -75,7 +75,7 @@ int main() {
 	pthread_t threads[NTHREADS];
 	proc_args args[NTHREADS]; 
 
-    // Start all the threads
+	// Start all the threads
 	for (int i = 0; i < NTHREADS; i++) {
         if (i == NTHREADS - 1) {
             set(args + i, arr, (len / NTHREADS) * i, len -  (len / NTHREADS) * i, i + 1);
@@ -85,12 +85,12 @@ int main() {
 		pthread_create(threads + i, NULL, proc, args + i);
 	}
 
-    // Join all the threads
+	// Join all the threads
 	for (int i = 0; i < NTHREADS; i++) {
 		pthread_join(threads[i], NULL);
 	}
 
-    // Print result
+	// Print result
 	print_arr(arr, len);
 	
 	exit(EXIT_SUCCESS);
