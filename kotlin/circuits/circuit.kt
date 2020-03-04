@@ -107,7 +107,7 @@ class xorgate: gate(1) {
 
     override fun update() {
 
-        if (input(0).state || input(1).state && !(input(0).state && input(1).state)) {
+        if ( (input(0).state && !input(1).state) || (!(input(0).state && input(1).state)) ) {
             output(0).state = true
         } else {
             output(0).state = false
@@ -142,5 +142,17 @@ class printgate: gate(0) {
         }
 
     }
+
+}
+
+class outgate(val outstr: (b: Boolean) -> String): gate(0) {
+
+	override fun update() {
+
+			for (c in inputs) {
+				println(outstr(c.state))
+			}
+
+	}
 
 }
