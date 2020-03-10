@@ -6,6 +6,7 @@
 #include <stdio.h>
 #include <signal.h>
 
+// This code assumes that there are 31 signals
 #define NUMSIGNALS 31
 #define EXIT 0
 
@@ -53,21 +54,9 @@ signal_tt signals[] = {
 
 };
 
-char* getname(int sig) {
-
-    for (int i = 0; i < NUMSIGNALS; i++) {
-        if (signals[i].num == sig) {
-            return signals[i].name;
-        }
-    }
-
-    return NULL;
-
-}
-
 void handler(int sig) {
 
-    printf("Received signal num %d: %s\n", sig, getname(sig));
+    printf("Received signal num %d: %s\n", sig, signals[sig - 1].name);
 
     if (EXIT)
         exit(1);
@@ -80,7 +69,7 @@ int main(int argc, char **argv) {
 
     sa.sa_handler = handler;
 
-    for (int i = 0; i < NUMSIGNALS; i++) {
+    for (int i = 1; i <= NUMSIGNALS; i++) {
         sigaction(i, &sa, NULL);
     }
 
