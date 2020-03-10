@@ -58,8 +58,9 @@ void handler(int sig) {
 
     printf("Received signal num %d: %s\n", sig, signals[sig - 1].name);
 
-    if (EXIT)
+    #if EXIT
         exit(1);
+    #endif
 
 }
 
