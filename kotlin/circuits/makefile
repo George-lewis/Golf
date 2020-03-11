@@ -1,11 +1,11 @@
 all: run
 
 .PHONY: run
-run: MainKt.class
+run: out/MainKt.class
 	cd out && kotlin MainKt
 	cd ..
 
-MainKt.class: *.kt
+out/MainKt.class: *.kt
 	mkdir -p out
 	kotlinc -d out/ $^
 
