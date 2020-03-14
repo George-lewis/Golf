@@ -18,44 +18,47 @@
 	li $t2, 0x0000ff	# $t2 stores the blue colour code
 	
 	lw $t3, base		# Current pos, initialize with base address
-	li $t4, 0 		# Position in line
-	li $t5, 0 		# Line count
-
-loop: 				# Painting loop
-	li $v0, 3 		# Set up Division operand
-	divu $t5, $v0 		# Divide
-	mfhi $t6 		# Capture remainder
-	bne $t6, 0, blue 	# If $t3 % 3 != 0 then jump to tryblue
-	sw $t0, ($t3) 		# Paint red
-	j finishpaint 		# Jump over the rest of the paint operations
-
-blue:
-	li $v0, 2
-	divu $t5, $v0		# Check if line count is multiple of two
-	mfhi $t6
-	bne $t6, 0, green 	# Jump to trygreen if $t3 % 2 != 0
-	sw $t1, ($t3) 		# Paint green
-	j finishpaint
+	
+	li $t4, 0 		# Color counter
+	li $t5, 128		# Set up division operand
+	
+loop:
+	bne $t4, 0, green
+	sw $t0, ($t3)		# Pain read
+	j endpaint		# Done painting
 
 green:
+	bne $t4, 1, blue
+	sw $t1, ($t3)		# Paint green
+	j endpaint
 
-	sw $t2, ($t3) 		# Paint blue
-
-finishpaint:
-
-    	# increase counters by 4 bytes
-	addiu $t3, $t3, 4
-	addiu $t4, $t4, 4
+blue:
+	sw $t2, ($t3)		# Paint blue
 	
-	bne $t4, 128, ifline # if $t2 is 128, then we're done the line, otherwise jump to ifline
-	li $t4, 0 # set line pos back to 0
-	addiu $t5, $t5, 1 # increment line count 
-ifline:
-	bne $t5, 128, continue # if line count is 128 our program exits
+endpaint:
+	
+	addi $t3, $t3, 4	# Increment pixel pointer
+	
+	div $t3, $t5		# Check if we've begun a new line
+	mfhi $t6		# Get remainder
+	bne $t6, 0, nochange
+	addi $t4, $t4, 1	# Increment color
+	
+nochange:
+	
+	bne $t4, 3, cont	# 3 is the highest color value
+	
+	li $t4, 0		# Reset color
+
+cont:
+
+	bne $t3, 16384, noexit	# Check if we need to exit
 	j exit
-continue:
-	j loop
 	
+noexit:
+	sw $t2, 32($t3)
+	j loop
+
 exit:
 	li $v0, 10 # terminate the program gracefully
 	syscall
