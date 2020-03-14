@@ -19,7 +19,7 @@
 	
 	lw $t3, base		# Current pos, initialize with base address
 	
-	li $t4, 0 		# Color counter
+	move $t4, $zero 	# Color counter
 	li $t5, 128		# Set up division operand
 	
 loop:
