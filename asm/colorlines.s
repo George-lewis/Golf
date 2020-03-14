@@ -10,52 +10,52 @@
 # - Base Address for Display: 0x10008000 ($gp)
 #
 .data
-	displayAddress:	.word	0x10008000
+	base:	.word	0x10008000
 .text
-	lw $t0, displayAddress	# $t0 stores the base address for display
-	li $t1, 0xff0000	# $t1 stores the red colour code
-	li $t2, 0x00ff00	# $t2 stores the green colour code
-	li $t3, 0x0000ff	# $t3 stores the blue colour code
-	
-	sw $t1, 0($t0)	 # paint the first (top-left) unit red. 
-	sw $t2, 4($t0)	 # paint the second unit on the first row green. Why $t0+4?
-	sw $t3, 128($t0) # paint the first unit on the second row blue. Why +128?
-	
-	li $t4, 0 # Position in line
-	li $t5, 0 # Line count
-	lw $t6, displayAddress # Current pos
-loop:
-	li $v0, 3
-	divu $t5, $v0
-	mfhi $t7
-	bne $t7, 0, tryblue
-	sw $t1, ($t6)
-	j finishpaint
-tryblue:
-	li $v0, 2
-	divu $t5, $v0
-	mfhi $t7
-	bne $t7, 0, trygreen
-	sw $t3, ($t6)
-	j finishpaint
-trygreen:
 
-	sw $t2, ($t6)
+	li $t0, 0xff0000	# $t0 stores the red colour code
+	li $t1, 0x00ff00	# $t1 stores the green colour code
+	li $t2, 0x0000ff	# $t2 stores the blue colour code
+	
+	lw $t3, base		# Current pos, initialize with base address
+	li $t4, 0 		# Position in line
+	li $t5, 0 		# Line count
+
+loop: 				# Painting loop
+	li $v0, 3 		# Set up Division operand
+	divu $t5, $v0 		# Divide
+	mfhi $t6 		# Capture remainder
+	bne $t6, 0, blue 	# If $t3 % 3 != 0 then jump to tryblue
+	sw $t0, ($t3) 		# Paint red
+	j finishpaint 		# Jump over the rest of the paint operations
+
+blue:
+	li $v0, 2
+	divu $t5, $v0		# Check if line count is multiple of two
+	mfhi $t6
+	bne $t6, 0, green 	# Jump to trygreen if $t3 % 2 != 0
+	sw $t1, ($t3) 		# Paint green
+	j finishpaint
+
+green:
+
+	sw $t2, ($t3) 		# Paint blue
 
 finishpaint:
 
-	addiu $t6, $t6, 4
+    	# increase counters by 4 bytes
+	addiu $t3, $t3, 4
 	addiu $t4, $t4, 4
 	
-	bne $t4, 128, ifline
-	li $t4, 0
-	addiu $t5, $t5, 1
+	bne $t4, 128, ifline # if $t2 is 128, then we're done the line, otherwise jump to ifline
+	li $t4, 0 # set line pos back to 0
+	addiu $t5, $t5, 1 # increment line count 
 ifline:
-	bne $t5, 128, continue
-	j Exit
+	bne $t5, 128, continue # if line count is 128 our program exits
+	j exit
 continue:
 	j loop
 	
-Exit:
+exit:
 	li $v0, 10 # terminate the program gracefully
 	syscall
