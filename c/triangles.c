@@ -54,7 +54,7 @@ void free_table(HashTable* ht) {
 
 }
 
-int unique(triangle *tris, size_t n) {
+void unique(triangle *tris, size_t n) {
 
     HashTable ht = init(n);
 
