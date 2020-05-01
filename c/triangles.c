@@ -63,6 +63,8 @@ int unique(triangle *tris, size_t n) {
 
     printf("There are %d unique triangle kinds\n", ht.size);
 
+    free_table(&ht);
+
 }
 
 int main() {
