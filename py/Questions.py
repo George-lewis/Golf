@@ -8,8 +8,11 @@ class Q1:
     """
 
     def run():
-        print(Q1.s1([-10, 0, 1, 4.1, 10], 2))
-        print(Q1.s2([-10, 0, 1, 4.1, 10], 2))
+        r1 = Q1.s1([-10, 0, 1, 4.1, 10], 2)
+        r2 = Q1.s2([-10, 0, 1, 4.1, 10], 2)
+        print(r1)
+        print(r1)
+        assert r1 == r2
 
     def s1(l: List[int], k: int) -> List[int]:
         def _split() -> Tuple[List[int], List[int]]:
