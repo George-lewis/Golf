@@ -1,15 +1,17 @@
 from typing import List, Tuple
 
+
 class Q1:
     """
     Given a sorted array of numbers and a value k,
     return an array of the numbers sorted based on distance from k
     """
 
+    def run():
+        print(Q1.s1([-10, 0, 1, 4.1, 10], 2))
+        print(Q1.s2([-10, 0, 1, 4.1, 10], 2))
 
     def s1(l: List[int], k: int) -> List[int]:
-        
-
         def _split() -> Tuple[List[int], List[int]]:
             def __center() -> int:
                 for i in range(len(l) - 1):
@@ -39,7 +41,12 @@ class Q1:
         return _merge(first, second)
 
     def s2(l: List[int], k: int) -> List[int]:
-        return list(map(lambda z: z[1], sorted(map(lambda x: (abs(x - k), x), l), key=lambda y: y[0])))
+        return list(
+            map(
+                lambda z: z[1],
+                sorted(map(lambda x: (abs(x - k), x), l), key=lambda y: y[0]),
+            )
+        )
 
-print(Q1.s1([-10, 0, 1, 4.1, 10], 2))
-print(Q1.s2([-10, 0, 1, 4.1, 10], 2))
+
+Q1.run()
