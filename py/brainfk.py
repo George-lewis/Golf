@@ -15,7 +15,7 @@ def findnext(l):
             count -= 1
         if count == 0:
             return i
-    raise ValueError(f'bruh: {count}')
+    raise ValueError('Mismatched brackets')
 
 def findprevious(l):
     count = 1
@@ -27,7 +27,7 @@ def findprevious(l):
             count -= 1
         if count == 0:
             return i
-    raise ValueError('bruh')
+    raise ValueError('Mismatched brackets')
 
 
 with open(argv[1]) as file:
