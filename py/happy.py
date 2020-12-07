@@ -1,3 +1,9 @@
+########################################################################
+#                                                                      #
+# Calculates happy numbers: https://en.wikipedia.org/wiki/Happy_number #
+#                                                                      #
+########################################################################
+
 from math import floor, log
 
 _cache = {}
@@ -14,7 +20,7 @@ def digits(x):
 
 cache = {}
 
-def __happy(x: int, history) -> bool:
+def __happy(x, history):
     if x == 1:
         return True
     if x in history:
