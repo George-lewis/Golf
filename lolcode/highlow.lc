@@ -1,0 +1,39 @@
+HAI 1.0
+
+OBTW
+    This is a high-low number guessing game
+    Because Lolcode doesn't have a way to generate random numbers
+    The answer is hard-coded at 7
+TLDR
+
+CAN HAS STDIO?
+
+BTW LOLCAT HAS NO RANDOM NUMBER FACILITY
+I HAS A ANSWER ITZ 7
+
+I HAS A GUESS
+
+IM IN YR LOOP UPPIN YR ITERATOR WILE WIN
+
+    VISIBLE "GUESS NUMBR"
+
+    GIMMEH GUESS
+
+    GUESS IS NOW A NUMBR
+
+    BOTH SAEM GUESS AN ANSWER
+    O RLY?
+        YA RLY
+            VISIBLE "UR CORREKT"
+            GTFO
+        MEBBE DIFFRINT GUESS AN SMALLR OF GUESS AN ANSWER
+            VISIBLE "YOU GUESS TOO BIGLY"
+        NO WAI
+            VISIBLE "GUESS TOO SMOL"
+    OIC
+
+IM OUTTA YR LOOP
+
+VISIBLE "U WIN!!1"
+
+KTHXBYE
