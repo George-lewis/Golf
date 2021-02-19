@@ -54,12 +54,6 @@ char* takeUntil(char* str, const char until) {
 
 }
 
-//char** keys() {
-//
-//
-//
-//}
-
 int main(int argc, char** argv, char** envp) {
 
 	char *str, *user;
@@ -85,8 +79,6 @@ int main(int argc, char** argv, char** envp) {
 		printf("TERM: %s\n", buf);
 	
 	printf("envp is %i strings long\n", i);
-	
-	printf("Hello world!\n");
 	
 	printf("Hello %s!\n", user);
 	
