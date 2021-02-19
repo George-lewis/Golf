@@ -22,5 +22,5 @@ module Fibers
   a = chan.receive()
   chan.close()
   puts "Got #{a}\n"
-  
+
 end
