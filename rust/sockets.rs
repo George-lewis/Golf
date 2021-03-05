@@ -11,7 +11,7 @@ use io::Result;
 
 const IP: &str = "127.0.0.1:4456";
 
-fn send_id(socket: &mut TcpStream, id: u32) -> io::Result<()> {
+fn send_id(socket: &mut TcpStream, id: u32) -> Result<()> {
     socket.write_all(&id.to_ne_bytes())
 }
 
@@ -60,7 +60,7 @@ fn main() {
             }
         }
         _ => {
-            panic!("Bad command line");
+            panic!("Bad command line; usage: `sockets [client | server]`");
         }
     }
 }
