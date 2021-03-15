@@ -4,7 +4,7 @@
 #include <string>
 #include <iostream>
 
-void quadsplit(std::string &in, std::string &a, std::string &b, std::string &c ,std::string &d) {
+void quadsplit(std::string &in, std::string &a, std::string &b, std::string &c, std::string &d) {
     int len = in.length();
     int part = len / 4;
     a = in.substr(0 * part, part);
