@@ -1,8 +1,23 @@
-////////////////////////////////////////////////
-// an n_log_n solution to the two sum problem //
-////////////////////////////////////////////////
+///////////////////////////////////////////
+// some solutions to the two sum problem //
+///////////////////////////////////////////
 
-fn two_sum(target: i8, list: &mut [i8]) -> Option<(i8, i8)> {
+use std::collections::HashSet;
+
+// O(n^2)
+fn two_sum_1(target: i8, list: &[i8]) -> Option<(i8, i8)> {
+    for i in 0..list.len() {
+        for j in 0..list.len() {
+            if list[i] + list[j] == target {
+                return Some((list[i], list[j]))
+            }
+        }
+    }
+    None
+}
+
+// O(n log n)
+fn two_sum_2(target: i8, list: &mut [i8]) -> Option<(i8, i8)> {
     let mut i: usize = 0;
     let mut j: usize = list.len() - 1;
     list.sort_unstable();
@@ -23,6 +38,20 @@ fn two_sum(target: i8, list: &mut [i8]) -> Option<(i8, i8)> {
     }
 }
 
+// O(n)
+fn two_sum_3(target: i8, list: &[i8]) -> Option<(i8, i8)> {
+    let mut hs: HashSet<i8> = HashSet::new();
+    for &x in list {
+        if hs.contains(&(target - x)) {
+            return Some((x, target - x))
+        }
+        hs.insert(x);
+    }
+    None
+}
+
 fn main() {
-    dbg!(two_sum(5, &mut [7, 0, 1, 2, -7, 3, 4, 5, 1]));
+    dbg!(two_sum_1(5, &[7, 0, 1, 2, -7, 3, 4, 5, 1]));
+    dbg!(two_sum_2(5, &mut [7, 0, 1, 2, -7, 3, 4, 5, 1]));
+    dbg!(two_sum_3(5, &[7, 0, 1, 2, -7, 3, 4, 5, 1]));
 }
