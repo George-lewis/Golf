@@ -95,17 +95,13 @@ fn main() {
     let mut result = Vec::new();
     for _ in 0..200 {
         let n = fib.next();
-        let is_happy = happy.is_happy(n);
-        if !is_happy {
+        if !happy.is_happy(n) {
             continue;
         }
-        let is_prime = prime.is_prime(n);
-        if !is_prime {
+        if !prime.is_prime(n) {
             continue;
         }
-        if is_happy && is_prime {
-            result.push(n);
-        }
+        result.push(n);
     }
     println!("{:?}", result);
 }
