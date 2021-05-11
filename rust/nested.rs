@@ -6,6 +6,7 @@
 ///!     w();
 ///!     if B {
 ///!         e();
+///!         [ you could nest more here ]
 ///!         true
 ///!     } else {
 ///!         f();
