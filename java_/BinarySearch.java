@@ -8,7 +8,7 @@ public class BinarySearch {
             return _binarySearch(arr, middle, end, search);
         } else if (cmp == 0) {
             return middle;
-        } else {
+        } else /*if (cmp < 0)*/ {
             return _binarySearch(arr, start, middle, search);
         }
     }
