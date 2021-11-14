@@ -17,7 +17,6 @@ def staircase_opt(N: int, X: set[int]):
     OPT = [1] + [0] * N
     for n in range(1, N+1):
         for x in X:
-            OPT[n] += OPT.get
             nx = n - x
             if nx < 0:
                 continue
