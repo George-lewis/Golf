@@ -24,7 +24,6 @@ class Allocator:
             elif (i - stride) == req:
                 self._alloc(stride, i)
                 return (stride, i)
-                
 
     def _free(self, start: int, end: int):
         for i in range(start, end):
@@ -33,6 +32,7 @@ class Allocator:
 
     def free(self, id: (int, int)):
         self._free(id[0], id[1])
+
 
 alc = Allocator(32)
 print(alc.alloc(3), alc.freelist)
