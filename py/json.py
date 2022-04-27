@@ -1,5 +1,4 @@
 # A very simple json parser
-#
 # Only works with minified json (no spaces)
 # All values must have a comma on the end (even when it's the last kv pair)
 # Will parse some invalid json forms, such as strings with no quotation marks
@@ -54,6 +53,8 @@ def _parse(s: str, st: int = 0, ed: int = 0) -> Union[dict, list]:
         while st < ed:
             idx = _next_value(s, st, ed)
             val = trim(s[st : idx])
+            if val[0] in ('{', '['):
+                val = parse(val)
             data.append(val)
             st = idx + 1
         return data
@@ -63,6 +64,6 @@ def _parse(s: str, st: int = 0, ed: int = 0) -> Union[dict, list]:
 def parse(s: str):
     return _parse(s, 0, len(s))
 
-x = parse('{"k":"v","b":"t","q":"r","m":{"t":"p",},"L":[5,7,"ff",],"Q":",,,","DDD D": f f f f,"obj":{"1":2,"3":4,"L":[1,2,3,],},}')
+x = parse('{"k":"v","b":"t","q":"r","m":{"t":"p",},"L":[5,7,"ff",],"Q":",,,","DDD D": f f f f,"obj":{"1":2,"3":4,"L":[1,2,3,{"a":"b",},],},}')
 
 print(x)
